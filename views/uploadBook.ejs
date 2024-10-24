@@ -1,0 +1,52 @@
+<%- include('parts/top.ejs')%>
+
+
+
+
+<div class="container">
+    <h1>Télécharger un Livre PDF</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="book" id="bookInput" accept="application/pdf" required>
+        <button type="submit">Télécharger le Livre</button>
+    </form>
+
+    <div id="imagePreview"></div>
+</div>
+
+<script>
+    document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        const fileInput = document.getElementById("bookInput");
+        formData.append("book", fileInput.files[0]);
+
+        try {
+            const response = await fetch("http://localhost:3000/api/pdf/uploadBook", {
+                method: "POST",
+                body: formData,
+            });
+
+            const result = await response.json();
+            console.log(result);
+
+            if (result.image) {
+                // Afficher l'image sur votre page
+                const imgElement = document.createElement("img");
+                imgElement.src = `http://localhost:3000/${result.image}`;
+                imgElement.alt = "Aperçu du Livre";
+                document.getElementById("imagePreview").innerHTML = "";
+                document.getElementById("imagePreview").appendChild(imgElement);
+            } else {
+                alert("Erreur lors du téléchargement ou de la conversion du livre.");
+            }
+        } catch (error) {
+            console.error("Erreur lors de l'upload:", error);
+        }
+    });
+</script>
+
+
+
+
+<%- include('parts/buttom.ejs')%>

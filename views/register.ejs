@@ -1,0 +1,101 @@
+<%- include('parts/top.ejs')%>
+
+
+
+
+
+<br>
+
+<div class="container d-flex justify-content-center">
+  <div class="login-container">
+    <h2 class="form-title ml-5 mr-5">Créez un compte</h2>
+    <form action="/register" method="POST">
+      <div class="mb-3">
+        <label for="name" class="form-label">
+          <i class="fas fa-user"></i> Votre nom
+        </label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Entrez votre nom" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">
+          <i class="fas fa-envelope"></i> Adresse email
+        </label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">
+          <i class="fas fa-lock"></i> Mot de passe
+        </label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+      </div>
+     
+      <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary w-100">Register</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+ body {
+  background-image: url('https://images.pexels.com/photos/694740/pexels-photo-694740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  position: relative;
+  margin: 0;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1px); /* Applique un flou à l'image */
+  z-index: -1; /* Garde cette couche derrière tout le reste */
+}
+
+
+    .login-container {
+      margin-top: 100px;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .form-control {
+      border-radius: 20px;
+    }
+    .btn-primary {
+      border-radius: 20px;
+      background-color: #5c67f2;
+    }
+    .btn-primary:hover {
+      background-color: #4a55d1;
+    }
+    .form-title {
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: 'Arial', sans-serif;
+      color: #333;
+    }
+
+</style>

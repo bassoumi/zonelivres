@@ -1,0 +1,2 @@
+import { ReadStream } from 'fs';
+export declare function convertToStream(source: string, file: string | Buffer): ReadStream;

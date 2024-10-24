@@ -1,0 +1,2 @@
+import { ReadStream } from 'fs';
+export declare function base64ToStream(base64: string): ReadStream;

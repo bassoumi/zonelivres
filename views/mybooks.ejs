@@ -1,0 +1,116 @@
+<%- include('parts/top.ejs') %>
+
+<br><br><br><br>
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">Titre</th>
+          <th scope="col">Autheur</th>
+          <th scope="col">Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let book of books) { %>
+        <tr>
+          <td>
+            <img src="/<%= book.cover %>" alt="Book Cover" style="width: 100px; height: auto;">
+          </td>
+          <td><%= book.title %></td>
+          <td>
+            <%= book.author.split(" ").slice(0, 3).join(" ") + (book.author.split(" ").length > 3 ? "..." : "") %>
+          </td>
+          <td>
+            <%= new Date(book.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+          </td>
+          <td>
+            <a class="btn btn-success" href="/<%= book.livre %>" download>Telecharger</a>
+            <a class="btn btn-danger" href="/mybooks/delete/<%= book._id %>">Supprimer</a>
+            <a class="btn btn-info" href="/mybooks/update/<%= book._id %>">Modifier</a>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<%- include('parts/buttom.ejs') %>
+
+
+<style>
+  /* Styles pour les petits écrans */
+@media (max-width: 768px) {
+  /* Rendre la table scrollable horizontalement sur petits écrans */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Adapter l'affichage des images pour les petits écrans */
+  .table img {
+    width: 60px; /* Réduire la taille des images */
+    height: auto;
+  }
+
+  /* Changer l'apparence des boutons pour qu'ils s'adaptent à la taille de l'écran */
+  .table td a {
+    font-size: 12px; /* Réduire la taille des boutons */
+    padding: 5px 10px;
+  }
+
+  /* Afficher les colonnes en bloc et ajuster les espacements */
+  .table td, .table th {
+    display: block;
+    text-align: center; /* Centrer le contenu */
+    width: 100%;
+  }
+
+  /* Masquer les en-têtes pour les petits écrans */
+  .table thead {
+    display: none;
+  }
+
+  /* Ajouter un espacement entre les lignes pour les petits écrans */
+  .table tbody tr {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    display: block;
+  }
+
+  /* Styliser chaque ligne pour qu'elle ressemble à une carte sur mobile */
+  .table tbody tr td {
+    border: none;
+    padding: 10px;
+    text-align: left;
+  }
+
+  /* Ajouter une légende avant chaque cellule pour clarifier les informations sur petits écrans */
+  .table tbody tr td:nth-of-type(1)::before {
+    content: "Image :";
+  }
+  .table tbody tr td:nth-of-type(2)::before {
+    content: "Titre :";
+  }
+  .table tbody tr td:nth-of-type(3)::before {
+    content: "Auteur :";
+  }
+  .table tbody tr td:nth-of-type(4)::before {
+    content: "Date :";
+  }
+  .table tbody tr td:nth-of-type(5)::before {
+    content: "Action :";
+  }
+
+  /* Ajouter un petit espacement entre les cellules */
+  .table tbody tr td::before {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+}
+
+</style>

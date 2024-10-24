@@ -1,0 +1,202 @@
+<%- include('parts/top.ejs') %>
+<style>
+  .add-book-form {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.add-book-form .card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.add-book-form .card h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #333;
+}
+
+.add-book-form .form-control {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  box-shadow: none;
+}
+
+.add-book-form .form-control:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #007bff;
+}
+
+.add-book-form .btn {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.add-book-form .btn:hover {
+  background-color: #0056b3;
+}
+.position-relative {
+  position: relative;
+}
+
+.tick-icon {
+  position: absolute;
+  right: -30px;
+  top: 70%;
+  transform: translateY(-50%);
+  font-size: 1.5em;
+  pointer-events: none; /* Évite que l'icône interfère avec la saisie */
+}
+
+.validate-input:valid + .tick-icon {
+  display: inline;
+}
+
+
+</style>
+<br><br>
+
+<div class="container add-book-form">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4">Ajouter un Livre</h2>
+          <form method="POST" action="/addbook" enctype="multipart/form-data">
+            <div class="form-group position-relative">
+              <label for="title">
+                <i class="fas fa-book"></i> Titre du Livre
+              </label>
+              <input type="text" class="form-control validate-input" id="title" name="title" placeholder="Entrez le titre du livre" oninput="validateInput(this)">
+              <i class="fa fa-check-circle text-success position-absolute tick-icon" style="display: none;"></i>
+            </div>
+            
+            <div class="form-group position-relative">
+              <label for="description">
+                <i class="fas fa-pencil-alt"></i> Description
+              </label>
+              <textarea class="form-control validate-input" id="description" name="description" rows="4" placeholder="Entrez une description" oninput="validateInput(this)"></textarea>
+              <i class="fa fa-check-circle text-success position-absolute tick-icon" style="display: none;"></i>
+            </div>
+            
+            <div class="form-group position-relative">
+              <label for="author">
+                <i class="fas fa-user"></i> Auteur
+              </label>
+              <input type="text" class="form-control validate-input" id="author" name="author" placeholder="Entrez le nom de l'auteur" oninput="validateInput(this)">
+              <i class="fa fa-check-circle text-success position-absolute tick-icon" style="display: none;"></i>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="cover">
+                  <i class="fas fa-image"></i> Couverture
+                </label>
+                <input type="file" class="form-control" id="cover" name="cover" accept="image/*" onchange="previewImage(event)">
+              </div>
+              
+              <div class="form-group col-md-6">
+                <label for="livre">
+                  <i class="fas fa-file-pdf"></i> Fichier du Livre (PDF)
+                </label>
+                <input type="file" class="form-control" id="livre" name="livre" accept="application/pdf" onchange="previewPDF(event)">
+              </div>
+            </div>
+
+            <div class="form-row" style="margin-top: 10px;">
+              <div class="form-group col-md-6" id="image-preview" style="display:none; position: relative; height: 300px;">
+                <img id="image-preview-img" src="" alt="Aperçu de l'image" class="image-zoom" style="width: 80%; height: 100%; border: 1px solid #ddd; padding: 5px; border-radius: 5px;">
+                <div class="overlay-text">Cover</div>
+              </div>
+              
+              <div class="form-group col-md-6" id="pdf-preview" style="display:none; position: relative; height: 300px;">
+                <canvas id="pdf-preview-canvas" class="image-zoom" style="width: 80%; height: 100%; border: 1px solid #ddd; padding: 5px; border-radius: 5px;"></canvas>
+                <div class="overlay-text">Document</div>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block mt-4">Ajouter</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+
+function validateInput(input) {
+  var tickIcon = input.parentElement.querySelector('.tick-icon');
+  if (input.value.trim() !== '') {
+    tickIcon.style.display = 'inline';
+  } else {
+    tickIcon.style.display = 'none';
+  }
+}
+
+
+
+  function previewImage(event) {
+    const imagePreview = document.getElementById('image-preview');
+    const imagePreviewImg = document.getElementById('image-preview-img');
+    
+    // Vérifie si un fichier a été sélectionné
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        imagePreviewImg.src = e.target.result;
+        imagePreview.style.display = 'block'; // Affiche le conteneur d'aperçu d'image
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    } else {
+      imagePreview.style.display = 'none'; // Cache le conteneur si aucun fichier
+    }
+  }
+
+  function previewPDF(event) {
+    const pdfPreview = document.getElementById('pdf-preview');
+    const pdfPreviewCanvas = document.getElementById('pdf-preview-canvas');
+    
+    // Vérifie si un fichier a été sélectionné
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const pdfData = new Uint8Array(e.target.result);
+        
+        // Utilisez une bibliothèque comme pdf.js pour afficher le PDF
+        pdfjsLib.getDocument(pdfData).promise.then(pdf => {
+          pdf.getPage(1).then(page => {
+            const scale = 1.5; // Échelle pour l'aperçu
+            const viewport = page.getViewport({ scale: scale });
+            pdfPreviewCanvas.width = viewport.width;
+            pdfPreviewCanvas.height = viewport.height;
+            const context = pdfPreviewCanvas.getContext('2d');
+            const renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
+            page.render(renderContext);
+            pdfPreview.style.display = 'block'; // Affiche le conteneur d'aperçu de PDF
+          });
+        });
+      }
+      reader.readAsArrayBuffer(file);
+    } else {
+      pdfPreview.style.display = 'none'; // Cache le conteneur si aucun fichier
+    }
+  }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+
+<%- include('parts/buttom.ejs') %>

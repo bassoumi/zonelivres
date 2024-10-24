@@ -1,0 +1,225 @@
+<%- include('parts/top.ejs') %>
+
+<br><br><br><br>
+<link href="../assets/css/app.css" rel="stylesheet">
+<!-- StyleSheet -->
+<link rel="manifest" href="/manifest.json">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="../assets/bootstrap.css">
+<!-- Magnific Popup -->
+<link rel="stylesheet" href="../assets/magnific-popup.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="../assets/font-awesome.css">
+<!-- Fancybox -->
+<link rel="stylesheet" href="../assets/jquery.fancybox.min.css">
+<!-- Themify Icons -->
+<link rel="stylesheet" href="../assets/themify-icons.css">
+<!-- Nice Select CSS -->
+<link rel="stylesheet" href="../assets/niceselect.css">
+<!-- Animate CSS -->
+<link rel="stylesheet" href="../assets/animate.css">
+<!-- Flex Slider CSS -->
+<link rel="stylesheet" href="../assets/flex-slider.min.css">
+<!-- Owl Carousel -->
+<link rel="stylesheet" href="../assets/owl-carousel.css">
+<!-- Slicknav -->
+<link rel="stylesheet" href="../assets/slicknav.min.css">
+<!-- Jquery Ui -->
+<link rel="stylesheet" href="../assets/jquery-ui.css">
+
+<!-- Eshop StyleSheet -->
+<link rel="stylesheet" href="../assets/reset.css">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/responsive.css">
+</header>
+<style>
+    /* Multilevel dropdown */
+    .dropdown-submenu {
+    position: relative;
+    }
+
+    .dropdown-submenu>a:after {
+    content: "\f0da";
+    float: right;
+    border: none;
+    font-family: 'FontAwesome';
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: 0px;
+    margin-left: 0px;
+    }
+
+    .product-image {
+    max-width: 150%; /* L'image prendra la largeur disponible dans son conteneur */
+    max-height: 450px; /* Limite la hauteur de l'image à 400px */
+    width: auto; /* Garde la largeur proportionnelle */
+    height: auto; /* Garde la hauteur proportionnelle */
+    object-fit: cover; /* S'assure que l'image garde ses proportions même si la taille change */
+margin-left: 100px;
+transition: transform 0.3s ease;}
+.product-image:hover {
+    transform: scale(1.1); /* Zoom avant à 110% */
+    border: 5px solid #a5a2a2; /* Bordure en pointillé lors du hover */
+}
+</style>
+<body>
+
+
+<section class="shop single section mt-5">
+    <div class="container">
+        <div class="row"> 
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-lg-6 col-8">
+                        <!-- Product Slider -->
+                        <div class="product-gallery position-relative">
+                            <img src="/<%= book.cover %>" alt="Book Cover" class="product-image img-fluid rounded shadow-lg">
+                            <div class="flexslider-thumbnails mt-3">
+                                <ul class="slides">
+                                    <!-- Thumbnails here -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Product slider -->
+                    </div>
+                    <div class="col-lg-6 col-8">
+                        <div class="product-des p-4 rounded shadow-lg bg-light">
+                            <!-- Title Section -->
+                            <div class="short text-center">
+                                <a href="#" class="text-decoration-none">
+                                    <h4 class="fw-bold text-primary"><%= book.title %></h4>
+                                </a>
+                            </div>
+                            <br>
+                            <!-- Author Section -->
+                            <div class="short">
+                                <h4 class="d-inline text-secondary">Nom de l'auteur : </h4><br>
+                                <p class="description d-inline ms-2  text-dark"><%= book.author %></p> <!-- Classe text-uppercase pour mettre en majuscules -->
+                            </div>
+                            <br>
+                            <!-- Description Section -->
+                            <div class="short">
+                                <a href="#" class="text-decoration-none">
+                                    <h4 class="text-secondary">Description :</h4>
+                                </a>
+                                <p class="description text-muted"> 
+                                    <%= book.description %> Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                                </p>
+                            </div>
+                            <br>
+                            <!-- Date Section -->
+                            <div class="short">
+                                <h4 class="d-inline text-secondary">Date d'ajout :</h4><br>
+                                <p class="description d-inline ms-2 text-dark">
+                                    <%= new Date(book.createdAt).toLocaleDateString('fr-FR', {
+                                      day: 'numeric', 
+                                      month: 'long', 
+                                      year: 'numeric' 
+                                    }) %>
+                                </p>
+                            </div>
+                            <br>
+                            <!-- Download Button -->
+                            <div class="d-flex justify-content-end">
+                                <a class="btn btn-success shadow-lg" href="/images/<%= book.livre.split('/').pop() %>" download>Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<style>
+/* Rating */
+.rating_box {
+display: inline-flex;
+}
+
+.star-rating {
+font-size: 0;
+padding-left: 10px;
+padding-right: 10px;
+}
+
+.star-rating__wrap {
+display: inline-block;
+font-size: 1rem;
+}
+
+.star-rating__wrap:after {
+content: "";
+display: table;
+clear: both;
+}
+
+.star-rating__ico {
+float: right;
+padding-left: 2px;
+cursor: pointer;
+color: #F7941D;
+font-size: 16px;
+margin-top: 5px;
+}
+
+.star-rating__ico:last-child {
+padding-left: 0;
+}
+
+.star-rating__input {
+display: none;
+}
+
+.star-rating__ico:hover:before,
+.star-rating__ico:hover ~ .star-rating__ico:before,
+.star-rating__input:checked ~ .star-rating__ico:before {
+content: "\F005";
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+<script>
+$('.cart').click(function(){
+    var quantity=$('#quantity').val();
+    var pro_id=$(this).data('id');
+    // alert(quantity);
+    $.ajax({
+        url:"{{route('add-to-cart')}}",
+        type:"POST",
+        data:{
+            _token:"{{csrf_token()}}",
+            quantity:quantity,
+            pro_id:pro_id
+        },
+        success:function(response){
+            console.log(response);
+            if(typeof(response)!='object'){
+                response=$.parseJSON(response);
+            }
+            if(response.status){
+                swal('success',response.msg,'success').then(function(){
+                    document.location.href=document.location.href;
+                });
+            }
+            else{
+                swal('error',response.msg,'error').then(function(){
+                    document.location.href=document.location.href;
+                });
+            }
+        }
+    })
+});
+</script> 
+
+
+
+
+
+<%- include('parts/buttom.ejs')%>

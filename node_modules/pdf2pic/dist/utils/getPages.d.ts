@@ -1,0 +1,3 @@
+import { ReadStream } from 'fs';
+import { Graphics } from '../graphics';
+export declare function getPages(gm: Graphics, pdf_path: ReadStream): Promise<number[]>;

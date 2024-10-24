@@ -1,0 +1,1 @@
+export declare function convertToBuffer(source: string, data: string | Buffer): Promise<Buffer>;

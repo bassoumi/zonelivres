@@ -1,0 +1,130 @@
+
+<%- include('parts/top.ejs')%>
+
+<div class="page-heading contact-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="text-content">
+            <h4>Contactez-nous</h4>
+            <h2>Restons en Contact</h2>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="find-us">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>Our Location on Maps</h2>
+          </div>
+        </div>
+        <div class="col-md-8">
+<!-- How to change your own map point
+  1. Go to Google Maps
+  2. Click on your location point
+  3. Click "Share" and choose "Embed map" tab
+  4. Copy only URL and paste it within the src="" field below
+-->
+          <div id="map">
+            <iframe src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="330px" frameborder="0" style="border:0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="left-content">
+            <h4>À propos de Notre Bibliothèque</h4>
+            <p>Bienvenue dans notre bibliothèque en ligne, un espace dédié aux passionnés de lecture. Ici, vous pouvez explorer une vaste collection de livres, allant des classiques intemporels aux nouveautés les plus attendues.</p>
+            
+            <ul class="social-icons">
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-behance"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="send-message">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>envoyer un message</h2>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="contact-form">
+            <form id="contact" action="" method="post">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <fieldset>
+                    <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <fieldset>
+                    <input name="email" type="text" class="form-control" id="email" placeholder="E-Mail Address" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <fieldset>
+                    <input name="subject" type="text" class="form-control" id="subject" placeholder="Subject" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <ul class="accordion">
+            <li>
+                <a>Pourquoi Lire des Livres ?</a>
+                <div class="content">
+                    <p>Lire des livres enrichit l'esprit, développe l'imagination et permet de découvrir de nouveaux mondes. Que ce soit pour apprendre quelque chose de nouveau, se divertir ou s'évader, la lecture reste une activité précieuse et bénéfique.<br><br>Les livres sont des compagnons de voyage silencieux qui ouvrent des portes vers des cultures, des idées et des expériences différentes.</p>
+                </div>
+            </li>
+            <li>
+                <a>Genres de Livres Populaires</a>
+                <div class="content">
+                    <p>Les genres littéraires sont variés : romans policiers, science-fiction, fantasy, biographie, développement personnel, histoire, et bien d'autres. Chaque genre a ses propres caractéristiques et attire un public spécifique.<br><br>Explorer différents genres permet de découvrir de nouvelles perspectives et d'apprécier la richesse de la littérature mondiale.</p>
+                </div>
+            </li>
+            <li>
+                <a>Les Avantages de la Lecture Quotidienne</a>
+                <div class="content">
+                    <p>Lire quotidiennement améliore la concentration, stimule la créativité et aide à développer des compétences en communication. De plus, cela peut réduire le stress et favoriser une meilleure santé mentale.<br><br>Consacrer ne serait-ce que 20 minutes par jour à la lecture peut avoir un impact positif sur la vie quotidienne et le bien-être général.</p>
+                </div>
+            </li>
+            <li>
+                <a>Les Livres les Plus Influents de Tous les Temps</a>
+                <div class="content">
+                    <p>Certains livres ont laissé une empreinte indélébile sur la société. Des classiques comme "1984" de George Orwell, "Les Misérables" de Victor Hugo, ou "Pride and Prejudice" de Jane Austen ont influencé des générations de lecteurs et continuent d'inspirer aujourd'hui.<br><br>Ces ouvrages transcendent les époques et les cultures, nous rappelant le pouvoir intemporel de la littérature.</p>
+                </div>
+            </li>
+        </ul>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('parts/buttom.ejs')%>
